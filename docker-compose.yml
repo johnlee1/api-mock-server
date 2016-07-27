@@ -1,0 +1,5 @@
+app:
+  build: .
+  command: bash -c "hercule ./blueprints/test.md -o ./server.md && api-mock ./server.md"
+  volumes: 
+    - ./mock-server:/blueprints  
