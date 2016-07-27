@@ -1,5 +1,14 @@
-app:
-  build: .
-  command: bash -c "hercule ./blueprints/test.md -o ./server.md && api-mock ./server.md"
-  volumes: 
-    - ./mock-server:/blueprints  
+version: '2'
+services:
+  app:
+    build: ./app
+    command: python app.py
+    ports:
+      - "5000:5000"
+  mock-server:
+    build: ./mock-server
+    command: bash -c "hercule ./blueprints/mock-server.md -o ./blueprints/server.md && api-mock ./blueprints/server.md"
+    volumes: 
+      - ./mock-server/mock-server:/blueprints  
+    ports: 
+      - "3000:3000"
